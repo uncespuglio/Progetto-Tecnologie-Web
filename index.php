@@ -45,6 +45,12 @@ switch ($page) {
 		case 'admin_user_edit':
 			require __DIR__ . '/admin/admin_user_edit.php';
 		break;
+		case 'admin_user_delete':
+			require __DIR__ . '/admin/admin_user_delete.php';
+		break;
+		case 'admin_requests':
+			require __DIR__ . '/admin/admin_requests.php';
+		break;
 		case 'request_seat':
 			require __DIR__ . '/user/request_seat.php';
 		break;
