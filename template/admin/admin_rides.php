@@ -7,6 +7,7 @@
 			<p class="subtitle">Modifica o elimina annunci pubblicati dagli utenti.</p>
 		</div>
 		<div>
+			<a class="btn primary" href="<?= e(url('?p=admin_ride_create')) ?>">+ Crea passaggio</a>
 			<a class="btn" href="<?= e(url('?p=admin')) ?>">← Dashboard</a>
 		</div>
 	</div>

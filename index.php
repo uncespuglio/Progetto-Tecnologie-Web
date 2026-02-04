@@ -33,6 +33,9 @@ switch ($page) {
 		case 'admin_rides':
 			require __DIR__ . '/admin/admin_rides.php';
 		break;
+		case 'admin_ride_create':
+			require __DIR__ . '/admin/admin_ride_create.php';
+		break;
 		case 'admin_ride_edit':
 			require __DIR__ . '/admin/admin_ride_edit.php';
 		break;
