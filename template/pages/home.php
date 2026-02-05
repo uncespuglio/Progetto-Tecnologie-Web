@@ -51,7 +51,7 @@
 
 	<div class="card">
 		<h2 style="margin:0">Prossimi passaggi</h2>
-		<p class="muted" style="margin-top:6px">Ultimi annunci (demo).</p>
+		<p class="muted" style="margin-top:6px">Ultimi annunci.</p>
 
 		<?php if (!$rides): ?>
 			<p class="muted">Ancora nessun passaggio pubblicato.</p>

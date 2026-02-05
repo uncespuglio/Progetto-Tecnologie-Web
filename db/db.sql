@@ -3,7 +3,7 @@
 --
 --
 --
--- Account demo inseriti automaticamente dall'app (seed):
+-- Account di esempio inseriti automaticamente dall'app (seed):
 -- - sofia.rossi@unibo.test, marco.bianchi@unibo.test, giulia.conti@unibo.test, luca.ferretti@unibo.test / Password123!
 -- - admin@unibo.test / Password123!
 

@@ -33,6 +33,6 @@
 
 	<div class="card">
 		<h2 style="margin:0">Solo UNIBO</h2>
-		<p class="muted" style="margin-top:6px;">Il progetto è limitato a studenti UNIBO. Consigliato usare email <code>@studio.unibo.it</code> (in demo sono abilitate anche le <code>@unibo.test</code>).</p>
+		<p class="muted" style="margin-top:6px;">Il progetto è limitato a studenti UNIBO. Usa un'email <code>@studio.unibo.it</code>.</p>
 	</div>
 </div>
