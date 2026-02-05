@@ -91,6 +91,52 @@ function normalize_city(string $city): ?string
 	return $map[$k] ?? null;
 }
 
+function maps_station_for_city(string $city): string
+{
+	$city = normalize_city($city) ?? $city;
+	$map = [
+		'Bologna' => 'Stazione Bologna Centrale',
+		'Forlì' => 'Stazione di Forlì',
+		'Cesena' => 'Stazione di Cesena',
+		'Ravenna' => 'Stazione di Ravenna',
+		'Rimini' => 'Stazione di Rimini',
+	];
+	return $map[$city] ?? ('Stazione di ' . trim($city));
+}
+
+function google_maps_directions_url(string $fromCity, string $toCity, array $stops = []): string
+{
+	$origin = maps_station_for_city($fromCity);
+	$destination = maps_station_for_city($toCity);
+
+	$waypoints = [];
+	foreach ($stops as $s) {
+		$city = normalize_city((string)$s);
+		if ($city === null) {
+			continue;
+		}
+		if ($city === normalize_city($fromCity) || $city === normalize_city($toCity)) {
+			continue;
+		}
+		$station = maps_station_for_city($city);
+		if (!in_array($station, $waypoints, true)) {
+			$waypoints[] = $station;
+		}
+	}
+
+	$params = [
+		'api' => '1',
+		'origin' => $origin,
+		'destination' => $destination,
+		'travelmode' => 'driving',
+	];
+	if ($waypoints) {
+		$params['waypoints'] = implode('|', $waypoints);
+	}
+
+	return 'https://www.google.com/maps/dir/?' . http_build_query($params, '', '&', PHP_QUERY_RFC3986);
+}
+
 function is_unibo_email(string $email): bool
 {
 	$email = mb_strtolower(trim($email));

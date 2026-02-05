@@ -2,20 +2,35 @@
 <div class="grid two">
 	<div class="card">
 		<p class="pill">Passaggio</p>
-		<h1 class="title"><?= e($ride['from_city']) ?> → <?= e($ride['to_city']) ?></h1>
+		<?php $mapsUrl = google_maps_directions_url((string)$ride['from_city'], (string)$ride['to_city'], $stops ?? []); ?>
+		<h1 class="title">
+			<a href="<?= e($mapsUrl) ?>" target="_blank" rel="noopener" style="color:inherit; text-decoration:none;">
+				<?= e($ride['from_city']) ?> → <?= e($ride['to_city']) ?>
+			</a>
+		</h1>
 		<p class="subtitle">Partenza: <?= e($ride['depart_at']) ?></p>
 		<?php if (!empty($stops)): ?>
 			<div style="margin-top:10px; display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
 				<span class="muted" style="font-size:12px;">Percorso:</span>
-				<span class="pill"><?= e($ride['from_city']) ?></span>
+				<a class="pill" href="<?= e($mapsUrl) ?>" target="_blank" rel="noopener" style="text-decoration:none; color:inherit;">
+					<?= e($ride['from_city']) ?>
+				</a>
 				<?php foreach ($stops as $c): ?>
 					<span class="muted" aria-hidden="true">→</span>
-					<span class="pill"><?= e($c) ?></span>
+					<a class="pill" href="<?= e($mapsUrl) ?>" target="_blank" rel="noopener" style="text-decoration:none; color:inherit;">
+						<?= e($c) ?>
+					</a>
 				<?php endforeach; ?>
 				<span class="muted" aria-hidden="true">→</span>
-				<span class="pill"><?= e($ride['to_city']) ?></span>
+				<a class="pill" href="<?= e($mapsUrl) ?>" target="_blank" rel="noopener" style="text-decoration:none; color:inherit;">
+					<?= e($ride['to_city']) ?>
+				</a>
 			</div>
 		<?php endif; ?>
+
+		<div class="muted" style="margin-top:10px; font-size:12px;">
+			<a href="<?= e($mapsUrl) ?>" target="_blank" rel="noopener">Apri percorso su Google Maps (stazioni)</a>
+		</div>
 
 		<div style="margin-top:12px; display:grid; gap:10px;">
 			<div class="muted">Driver: <strong style="color:var(--text)"><?= e($ride['driver_name']) ?></strong> • <?= e($ride['university']) ?></div>
