@@ -16,7 +16,7 @@ foreach ($allowed as $i => $c) {
 }
 
 $stmt = $pdo->prepare(
-	"SELECT r.id, r.from_city, r.to_city, r.depart_at, r.seats_available, r.price_cents,
+	"SELECT r.id, r.from_city, r.to_city, r.depart_at, r.seats_available,
 		u.full_name AS driver_name, u.university
 	 FROM rides r
 	 JOIN users u ON u.id = r.driver_id

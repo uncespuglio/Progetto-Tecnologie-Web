@@ -35,7 +35,6 @@
 		<div style="margin-top:12px; display:grid; gap:10px;">
 			<div class="muted">Driver: <strong style="color:var(--text)"><?= e($ride['driver_name']) ?></strong> • <?= e($ride['university']) ?></div>
 			<div>Posti disponibili: <span class="pill"><?= e((string)$ride['seats_available']) ?></span></div>
-			<div>Prezzo: <span class="pill"><?= e(number_format(((int)$ride['price_cents'])/100, 2, ',', '.')) ?>€</span></div>
 			<?php if (!empty($ride['notes'])): ?>
 				<div class="card" style="padding:12px; background: rgba(15,23,42,.55)">
 					<div class="muted" style="font-size:12px">Note</div>

@@ -61,11 +61,19 @@ function ensure_schema(PDO $pdo): void
 		depart_at DATETIME NOT NULL,
 		seats_total INT NOT NULL,
 		seats_available INT NOT NULL,
-		price_cents INT NOT NULL DEFAULT 0,
 		notes TEXT NULL,
 		created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 		CONSTRAINT fk_rides_driver FOREIGN KEY (driver_id) REFERENCES users(id) ON DELETE CASCADE
 	) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4');
+
+	// Migrazione: rimuovi definitivamente il prezzo dal DB.
+	if (mysql_column_exists($pdo, 'rides', 'price_cents')) {
+		try {
+			$pdo->exec('ALTER TABLE rides DROP COLUMN price_cents');
+		} catch (Throwable $e) {
+			// Non bloccare l'app se l'ALTER fallisce (permessi/lock). Il sito non usa più il prezzo.
+		}
+	}
 
 	$pdo->exec('CREATE TABLE IF NOT EXISTS ride_requests (
 		id INT AUTO_INCREMENT PRIMARY KEY,

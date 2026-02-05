@@ -89,10 +89,7 @@
 				</div>
 			</div>
 
-			<div class="row two">
-				<label>Data e ora<input type="datetime-local" name="depart_at" required value="<?= e((string)$departLocal) ?>"></label>
-				<label>Prezzo (EUR)<input name="price_eur" inputmode="decimal" value="<?= e(number_format(((int)($ride['price_cents'] ?? 0))/100, 2, ',', '.')) ?>"></label>
-			</div>
+			<label>Data e ora<input type="datetime-local" name="depart_at" required value="<?= e((string)$departLocal) ?>"></label>
 
 			<div class="row two">
 				<label>Posti totali<input type="number" min="1" max="8" name="seats_total" required value="<?= e((string)($ride['seats_total'] ?? 3)) ?>"></label>

@@ -62,7 +62,6 @@
 						<th>Tratta</th>
 						<th>Partenza</th>
 						<th>Posti</th>
-						<th>Prezzo</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -76,7 +75,6 @@
 						</td>
 						<td><?= e($r['depart_at']) ?></td>
 						<td><?= e((string)$r['seats_available']) ?></td>
-						<td><?= e(number_format(((int)$r['price_cents'])/100, 2, ',', '.')) ?>€</td>
 					</tr>
 				<?php endforeach; ?>
 				</tbody>

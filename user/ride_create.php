@@ -11,7 +11,6 @@ if (is_post()) {
 	$toRaw = trim((string)($_POST['to_city'] ?? ''));
 	$departRaw = trim((string)($_POST['depart_at'] ?? ''));
 	$seatsTotal = (int)($_POST['seats_total'] ?? 0);
-	$price = trim((string)($_POST['price_eur'] ?? '0'));
 	$notes = trim((string)($_POST['notes'] ?? ''));
 	$stopsRaw = $_POST['stops'] ?? [];
 
@@ -46,14 +45,12 @@ if (is_post()) {
 	}
 
 	$departAt = str_replace('T', ' ', $departRaw);
-	$priceEur = (float)str_replace(',', '.', $price);
-	$priceCents = (int)round($priceEur * 100);
 
 	$pdo->beginTransaction();
 	try {
 		$stmt = $pdo->prepare(
-			'INSERT INTO rides (driver_id, from_city, to_city, depart_at, seats_total, seats_available, price_cents, notes)
-			 VALUES (:driver, :from, :to, :depart, :st, :sa, :price, :notes)'
+			'INSERT INTO rides (driver_id, from_city, to_city, depart_at, seats_total, seats_available, notes)
+			 VALUES (:driver, :from, :to, :depart, :st, :sa, :notes)'
 		);
 		$stmt->execute([
 		':driver' => (int)$user['id'],
@@ -62,7 +59,6 @@ if (is_post()) {
 		':depart' => $departAt,
 		':st' => $seatsTotal,
 		':sa' => $seatsTotal,
-		':price' => $priceCents,
 		':notes' => $notes === '' ? null : $notes,
 		]);
 		$rideId = (int)$pdo->lastInsertId();

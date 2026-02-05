@@ -13,7 +13,6 @@ $ride = [
 	'depart_at' => '',
 	'seats_total' => 3,
 	'seats_available' => 3,
-	'price_cents' => 0,
 	'notes' => '',
 ];
 
@@ -29,7 +28,6 @@ if (is_post()) {
 	$depart_raw = trim((string)($_POST['depart_at'] ?? ''));
 	$seats_total = (int)($_POST['seats_total'] ?? 0);
 	$seats_available = (int)($_POST['seats_available'] ?? 0);
-	$price_eur = trim((string)($_POST['price_eur'] ?? '0'));
 	$notes = trim((string)($_POST['notes'] ?? ''));
 	$stopsRaw = $_POST['stops'] ?? [];
 
@@ -49,7 +47,6 @@ if (is_post()) {
 	}
 
 	$depart_at = str_replace('T', ' ', $depart_raw);
-	$price_cents = (int)round(((float)str_replace(',', '.', $price_eur)) * 100);
 
 	$errors = [];
 	if ($driver_id <= 0) $errors[] = 'Seleziona un conducente.';
@@ -61,14 +58,13 @@ if (is_post()) {
 	if ($depart_raw === '') $errors[] = 'Data/ora sono obbligatorie.';
 	if ($seats_total <= 0) $errors[] = 'Posti totali non validi.';
 	if ($seats_available < 0 || $seats_available > $seats_total) $errors[] = 'Posti disponibili non validi.';
-	if ($price_cents < 0) $errors[] = 'Prezzo non valido.';
 
 	if (!$errors) {
 		$pdo->beginTransaction();
 		try {
 			$stmt = $pdo->prepare(
-				"INSERT INTO rides (driver_id, from_city, to_city, depart_at, seats_total, seats_available, price_cents, notes)
-				 VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
+				"INSERT INTO rides (driver_id, from_city, to_city, depart_at, seats_total, seats_available, notes)
+				 VALUES (?, ?, ?, ?, ?, ?, ?)"
 			);
 			$stmt->execute([
 				$driver_id,
@@ -77,7 +73,6 @@ if (is_post()) {
 				$depart_at,
 				$seats_total,
 				$seats_available,
-				$price_cents,
 				$notes === '' ? null : $notes,
 			]);
 			$rideId = (int)$pdo->lastInsertId();
@@ -111,7 +106,6 @@ if (is_post()) {
 	$ride['depart_at'] = $depart_at;
 	$ride['seats_total'] = $seats_total;
 	$ride['seats_available'] = $seats_available;
-	$ride['price_cents'] = $price_cents;
 	$ride['notes'] = $notes;
 	$stops = $stopsNew;
 	$departLocal = $depart_raw;

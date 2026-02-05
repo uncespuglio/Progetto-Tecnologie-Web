@@ -34,7 +34,6 @@ CREATE TABLE IF NOT EXISTS rides (
 	depart_at DATETIME NOT NULL,
 	seats_total INT NOT NULL,
 	seats_available INT NOT NULL,
-	price_cents INT NOT NULL DEFAULT 0,
 	notes TEXT NULL,
 	created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	CONSTRAINT fk_rides_driver FOREIGN KEY (driver_id) REFERENCES users(id) ON DELETE CASCADE,

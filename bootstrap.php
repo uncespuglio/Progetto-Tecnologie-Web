@@ -346,22 +346,22 @@ function seed_demo_data(PDO $pdo): void
 
 	$baseDate = date('Y-m-d');
 	$rides = [
-		['driver' => 'sofia.rossi@unibo.test', 'from' => 'Bologna', 'to' => 'Rimini', 'days' => 1, 'time' => '08:10:00', 'seats' => 3, 'price' => 500, 'notes' => 'Ritrovo: Stazione Bologna Centrale.', 'stops' => ['Forlì', 'Cesena']],
-		['driver' => 'marco.bianchi@unibo.test', 'from' => 'Rimini', 'to' => 'Bologna', 'days' => 1, 'time' => '17:40:00', 'seats' => 2, 'price' => 600, 'notes' => 'Solo zaino, no valigie grandi.'],
-		['driver' => 'giulia.conti@unibo.test', 'from' => 'Bologna', 'to' => 'Cesena', 'days' => 2, 'time' => '07:30:00', 'seats' => 3, 'price' => 450, 'notes' => null, 'stops' => ['Forlì']],
-		['driver' => 'luca.ferretti@unibo.test', 'from' => 'Cesena', 'to' => 'Bologna', 'days' => 2, 'time' => '18:15:00', 'seats' => 3, 'price' => 450, 'notes' => null],
-		['driver' => 'sofia.rossi@unibo.test', 'from' => 'Forlì', 'to' => 'Bologna', 'days' => 3, 'time' => '08:00:00', 'seats' => 2, 'price' => 400, 'notes' => 'Passo vicino al Campus di Forlì.'],
-		['driver' => 'marco.bianchi@unibo.test', 'from' => 'Bologna', 'to' => 'Ravenna', 'days' => 3, 'time' => '16:20:00', 'seats' => 3, 'price' => 550, 'notes' => null, 'stops' => ['Rimini']],
-		['driver' => 'giulia.conti@unibo.test', 'from' => 'Ravenna', 'to' => 'Bologna', 'days' => 4, 'time' => '07:45:00', 'seats' => 3, 'price' => 550, 'notes' => 'Ritrovo: Stazione Ravenna.'],
-		['driver' => 'luca.ferretti@unibo.test', 'from' => 'Bologna', 'to' => 'Forlì', 'days' => 4, 'time' => '18:05:00', 'seats' => 2, 'price' => 400, 'notes' => null],
-		['driver' => 'sofia.rossi@unibo.test', 'from' => 'Bologna', 'to' => 'Rimini', 'days' => 5, 'time' => '09:05:00', 'seats' => 3, 'price' => 500, 'notes' => 'Partenza zona Fiera.', 'stops' => ['Cesena']],
-		['driver' => 'giulia.conti@unibo.test', 'from' => 'Rimini', 'to' => 'Cesena', 'days' => 5, 'time' => '19:10:00', 'seats' => 2, 'price' => 350, 'notes' => null],
+		['driver' => 'sofia.rossi@unibo.test', 'from' => 'Bologna', 'to' => 'Rimini', 'days' => 1, 'time' => '08:10:00', 'seats' => 3, 'notes' => 'Ritrovo: Stazione Bologna Centrale.', 'stops' => ['Forlì', 'Cesena']],
+		['driver' => 'marco.bianchi@unibo.test', 'from' => 'Rimini', 'to' => 'Bologna', 'days' => 1, 'time' => '17:40:00', 'seats' => 2, 'notes' => 'Solo zaino, no valigie grandi.'],
+		['driver' => 'giulia.conti@unibo.test', 'from' => 'Bologna', 'to' => 'Cesena', 'days' => 2, 'time' => '07:30:00', 'seats' => 3, 'notes' => null, 'stops' => ['Forlì']],
+		['driver' => 'luca.ferretti@unibo.test', 'from' => 'Cesena', 'to' => 'Bologna', 'days' => 2, 'time' => '18:15:00', 'seats' => 3, 'notes' => null],
+		['driver' => 'sofia.rossi@unibo.test', 'from' => 'Forlì', 'to' => 'Bologna', 'days' => 3, 'time' => '08:00:00', 'seats' => 2, 'notes' => 'Passo vicino al Campus di Forlì.'],
+		['driver' => 'marco.bianchi@unibo.test', 'from' => 'Bologna', 'to' => 'Ravenna', 'days' => 3, 'time' => '16:20:00', 'seats' => 3, 'notes' => null, 'stops' => ['Rimini']],
+		['driver' => 'giulia.conti@unibo.test', 'from' => 'Ravenna', 'to' => 'Bologna', 'days' => 4, 'time' => '07:45:00', 'seats' => 3, 'notes' => 'Ritrovo: Stazione Ravenna.'],
+		['driver' => 'luca.ferretti@unibo.test', 'from' => 'Bologna', 'to' => 'Forlì', 'days' => 4, 'time' => '18:05:00', 'seats' => 2, 'notes' => null],
+		['driver' => 'sofia.rossi@unibo.test', 'from' => 'Bologna', 'to' => 'Rimini', 'days' => 5, 'time' => '09:05:00', 'seats' => 3, 'notes' => 'Partenza zona Fiera.', 'stops' => ['Cesena']],
+		['driver' => 'giulia.conti@unibo.test', 'from' => 'Rimini', 'to' => 'Cesena', 'days' => 5, 'time' => '19:10:00', 'seats' => 2, 'notes' => null],
 	];
 
 	try {
 		$stmtRide = $pdo->prepare(
-			'INSERT INTO rides (driver_id, from_city, to_city, depart_at, seats_total, seats_available, price_cents, notes)
-			 VALUES (:driver, :from, :to, :depart, :st, :sa, :price, :notes)'
+			'INSERT INTO rides (driver_id, from_city, to_city, depart_at, seats_total, seats_available, notes)
+			 VALUES (:driver, :from, :to, :depart, :st, :sa, :notes)'
 		);
 		$stmtStop = $pdo->prepare(
 			'INSERT INTO ride_stops (ride_id, stop_order, stop_city) VALUES (:ride, :ord, :city)'
@@ -379,7 +379,6 @@ function seed_demo_data(PDO $pdo): void
 				':depart' => $depart,
 				':st' => (int)$r['seats'],
 				':sa' => (int)$r['seats'],
-				':price' => (int)$r['price'],
 				':notes' => $r['notes'],
 			]);
 			$rideId = (int)$pdo->lastInsertId();

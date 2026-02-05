@@ -65,15 +65,8 @@
 					<input type="number" min="1" max="8" name="seats_total" value="3" required>
 				</label>
 			</div>
-			<div class="row two">
-				<label>
-					Prezzo (EUR)
-					<input name="price_eur" inputmode="decimal" value="0" placeholder="Es. 5,00">
-				</label>
-				<label>
-					&nbsp;
-					<button class="btn primary" type="submit">Pubblica</button>
-				</label>
+			<div style="margin-top:10px;">
+				<button class="btn primary" type="submit">Pubblica</button>
 			</div>
 			<label>
 				Note (opzionale)
@@ -87,7 +80,6 @@
 		<ul class="muted" style="margin-top:8px; line-height:1.6">
 			<li>Metti un orario realistico (ritrovo + traffico).</li>
 			<li>Aggiungi note su bagagli e punto d’incontro.</li>
-			<li>Prezzo: usa € e non centesimi.</li>
 		</ul>
 	</div>
 </div>

@@ -36,7 +36,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	$depart_raw = trim((string)($_POST['depart_at'] ?? ''));
 	$seats_total = (int)($_POST['seats_total'] ?? 0);
 	$seats_available = (int)($_POST['seats_available'] ?? 0);
-	$price_eur = trim((string)($_POST['price_eur'] ?? '0'));
 	$notes = trim((string)($_POST['notes'] ?? ''));
 	$stopsRaw = $_POST['stops'] ?? [];
 
@@ -57,8 +56,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 	$depart_at = str_replace('T', ' ', $depart_raw);
 
-	$price_cents = (int)round(((float)str_replace(',', '.', $price_eur)) * 100);
-
 	$errors = [];
 	if ($driver_id <= 0) $errors[] = 'Seleziona un conducente.';
 	if ($from === '' || $to === '') $errors[] = 'Partenza e destinazione sono obbligatorie.';
@@ -69,7 +66,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	if ($depart_raw === '') $errors[] = 'Data/ora sono obbligatorie.';
 	if ($seats_total <= 0) $errors[] = 'Posti totali non validi.';
 	if ($seats_available < 0 || $seats_available > $seats_total) $errors[] = 'Posti disponibili non validi.';
-	if ($price_cents < 0) $errors[] = 'Prezzo non valido.';
 
 	if (!$errors) {
 		$pdo->beginTransaction();
@@ -77,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 			$stmt = $pdo->prepare(
 				"UPDATE rides
 				 SET driver_id = ?, from_city = ?, to_city = ?, depart_at = ?,
-					 seats_total = ?, seats_available = ?, price_cents = ?, notes = ?
+					 seats_total = ?, seats_available = ?, notes = ?
 				 WHERE id = ?"
 			);
 			$stmt->execute([
@@ -87,7 +83,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 				$depart_at,
 				$seats_total,
 				$seats_available,
-				$price_cents,
 				$notes,
 				$id,
 			]);
@@ -120,7 +115,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	$ride['depart_at'] = $depart_at;
 	$ride['seats_total'] = $seats_total;
 	$ride['seats_available'] = $seats_available;
-	$ride['price_cents'] = $price_cents;
 	$ride['notes'] = $notes;
 	$stops = $stopsNew;
 }
