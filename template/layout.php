@@ -52,6 +52,8 @@ $user = current_user($pdo);
 			UniRide • Progetto universitario • <?= e(date('Y')) ?>
 		</div>
 	</div>
-	<script src="js/app.js"></script>
+	<script defer src="js/uniride-ui.js?v=<?= (int) @filemtime(__DIR__ . '/../js/uniride-ui.js') ?>"></script>
+	<script defer src="js/validate-email-studio.js?v=<?= (int) @filemtime(__DIR__ . '/../js/validate-email-studio.js') ?>"></script>
+	<script defer src="js/validate-password-length.js?v=<?= (int) @filemtime(__DIR__ . '/../js/validate-password-length.js') ?>"></script>
 </body>
 </html>
