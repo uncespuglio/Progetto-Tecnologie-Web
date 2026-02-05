@@ -49,7 +49,9 @@ $user = current_user($pdo);
 		</main>
 
 		<div class="footer">
-			UniRide • Progetto universitario • <?= e(date('Y')) ?>
+			<a class="footer-link" href="https://github.com/uncespuglio/Progetto-Tecnologie-Web/tree/main" target="_blank" rel="noopener noreferrer" aria-label="Apri la repository GitHub del progetto UniRide">
+				UniRide • Progetto universitario • <?= e(date('Y')) ?>
+			</a>
 		</div>
 	</div>
 	<script defer src="js/uniride-ui.js?v=<?= (int) @filemtime(__DIR__ . '/../js/uniride-ui.js') ?>"></script>
