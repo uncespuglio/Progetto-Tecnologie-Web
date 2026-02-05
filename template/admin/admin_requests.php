@@ -47,6 +47,7 @@
 					<label>
 						Stato
 						<select name="status" required>
+							<option value="" selected disabled>Seleziona stato…</option>
 							<option value="pending">pending</option>
 							<option value="accepted">accepted</option>
 							<option value="rejected">rejected</option>
