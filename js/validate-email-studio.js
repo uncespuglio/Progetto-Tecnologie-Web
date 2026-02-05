@@ -11,9 +11,10 @@
 		const id = `field-error-${idSuffix}`;
 		let errorEl = document.getElementById(id);
 		if (!errorEl) {
-			errorEl = document.createElement('div');
+			errorEl = document.createElement('span');
 			errorEl.id = id;
 			errorEl.className = 'field-error';
+			errorEl.setAttribute('role', 'status');
 			errorEl.setAttribute('aria-live', 'polite');
 			errorEl.setAttribute('aria-atomic', 'true');
 			errorEl.hidden = true;
