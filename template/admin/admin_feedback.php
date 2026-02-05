@@ -24,18 +24,23 @@
 						<option value="ride">Legato a passaggio (ride_id)</option>
 					</select>
 				</label>
-				<label>
-					Passaggio (ride_id)
-					<select name="ride_id_select">
-						<option value="0">(se manuale, lascia vuoto)</option>
-						<?php foreach ($rides as $r): ?>
-							<option value="<?= e((string)$r['id']) ?>">
-								#<?= e((string)$r['id']) ?> • <?= e((string)$r['from_city']) ?> → <?= e((string)$r['to_city']) ?> • <?= e((string)$r['depart_at']) ?> • Driver: <?= e((string)$r['driver_name']) ?>
-							</option>
-						<?php endforeach; ?>
-					</select>
-					<div class="muted" style="font-size:12px; margin-top:6px;">Se non trovi il passaggio, inserisci l’ID qui: <input type="number" name="ride_id_manual" min="0" placeholder="Es. 12" style="max-width:140px;"></div>
-				</label>
+				<div>
+					<label>
+						Passaggio (ride_id)
+						<select name="ride_id_select">
+							<option value="0">(se manuale, lascia vuoto)</option>
+							<?php foreach ($rides as $r): ?>
+								<option value="<?= e((string)$r['id']) ?>">
+									#<?= e((string)$r['id']) ?> • <?= e((string)$r['from_city']) ?> → <?= e((string)$r['to_city']) ?> • <?= e((string)$r['depart_at']) ?> • Driver: <?= e((string)$r['driver_name']) ?>
+								</option>
+							<?php endforeach; ?>
+						</select>
+					</label>
+					<label class="muted" style="font-size:12px; margin-top:6px;">
+						ID manuale (se non in lista)
+						<input type="number" name="ride_id_manual" min="0" placeholder="Es. 12" style="max-width:140px;">
+					</label>
+				</div>
 			</div>
 			<div class="row two">
 				<label>
@@ -61,6 +66,7 @@
 				<label>
 					Rating
 					<select name="rating" required>
+						<option value="" selected disabled>Seleziona…</option>
 						<?php for ($i = 1; $i <= 5; $i++): ?>
 							<option value="<?= $i ?>"><?= $i ?></option>
 						<?php endfor; ?>
@@ -121,6 +127,7 @@
 							<input type="hidden" name="op" value="update">
 							<input type="hidden" name="feedback_id" value="<?= e((string)$f['id']) ?>">
 							<select name="rating" required>
+								<option value="">Seleziona…</option>
 								<?php for ($i = 1; $i <= 5; $i++): ?>
 									<option value="<?= $i ?>" <?= ((int)$f['rating'] === $i) ? 'selected' : '' ?>><?= $i ?></option>
 								<?php endfor; ?>

@@ -89,6 +89,7 @@
 										<input type="hidden" name="ride_id" value="<?= e((string)$ride['id']) ?>">
 										<input type="hidden" name="to_user_id" value="<?= e((string)$pid) ?>">
 										<select name="rating" required>
+											<option value="" <?= $existing > 0 ? '' : 'selected' ?> disabled>Seleziona…</option>
 											<?php for ($i = 1; $i <= 5; $i++): ?>
 												<option value="<?= $i ?>" <?= ($existing === $i) ? 'selected' : '' ?>><?= $i ?></option>
 											<?php endfor; ?>
@@ -189,6 +190,7 @@
 					<label>
 						Valutazione (1–5)
 						<select name="rating" required>
+								<option value="" <?= $existing > 0 ? '' : 'selected' ?> disabled>Seleziona…</option>
 							<?php for ($i = 1; $i <= 5; $i++): ?>
 								<option value="<?= $i ?>" <?= ($existing === $i) ? 'selected' : '' ?>><?= $i ?></option>
 							<?php endfor; ?>
