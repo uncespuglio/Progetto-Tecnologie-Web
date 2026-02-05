@@ -12,7 +12,8 @@
 		<?php if (!$ridesUpcoming): ?>
 			<p class="muted" style="margin-top:14px;">Non hai ancora pubblicato passaggi.</p>
 		<?php else: ?>
-			<table class="table">
+			<div class="table-wrap">
+			<table class="table" style="min-width:920px;">
 				<thead>
 					<tr>
 						<th>Tratta</th>
@@ -30,13 +31,15 @@
 				<?php endforeach; ?>
 				</tbody>
 			</table>
+			</div>
 		<?php endif; ?>
 
 		<h2 style="margin-top:18px;">Storico (viaggi effettuati)</h2>
 		<?php if (!$ridesPast): ?>
 			<p class="muted" style="margin-top:10px;">Nessun viaggio effettuato ancora.</p>
 		<?php else: ?>
-			<table class="table" style="margin-top:10px;">
+			<div class="table-wrap">
+			<table class="table" style="min-width:920px;">
 				<thead>
 					<tr>
 						<th>Tratta</th>
@@ -54,6 +57,7 @@
 				<?php endforeach; ?>
 				</tbody>
 			</table>
+			</div>
 		<?php endif; ?>
 	</div>
 
@@ -62,7 +66,8 @@
 		<?php if (!$requestsUpcoming): ?>
 			<p class="muted" style="margin-top:10px;">Nessuna richiesta al momento.</p>
 		<?php else: ?>
-			<table class="table">
+			<div class="table-wrap">
+			<table class="table" style="min-width:1100px;">
 				<thead>
 					<tr>
 						<th>Passaggio</th>
@@ -110,13 +115,15 @@
 				<?php endforeach; ?>
 				</tbody>
 			</table>
+			</div>
 		<?php endif; ?>
 
 		<h2 style="margin-top:18px;">Storico richieste (viaggi effettuati)</h2>
 		<?php if (!$requestsPast): ?>
 			<p class="muted" style="margin-top:10px;">Nessuna richiesta nello storico.</p>
 		<?php else: ?>
-			<table class="table" style="margin-top:10px;">
+			<div class="table-wrap">
+			<table class="table" style="min-width:1100px; margin-top:10px;">
 				<thead>
 					<tr>
 						<th>Passaggio</th>
@@ -142,6 +149,7 @@
 				<?php endforeach; ?>
 				</tbody>
 			</table>
+			</div>
 		<?php endif; ?>
 	</div>
 </div>

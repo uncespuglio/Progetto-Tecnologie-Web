@@ -44,7 +44,8 @@
 		<?php if (!$rides): ?>
 			<p class="muted">Nessun passaggio corrisponde ai filtri.</p>
 		<?php else: ?>
-			<table class="table">
+			<div class="table-wrap">
+			<table class="table" style="min-width:920px;">
 				<thead>
 					<tr>
 						<th>Tratta</th>
@@ -72,6 +73,7 @@
 				<?php endforeach; ?>
 				</tbody>
 			</table>
+			</div>
 		<?php endif; ?>
 	</div>
 </div>

@@ -1,5 +1,5 @@
 <?php /** @var array $ride */ /** @var array $users */ /** @var string $departLocal */ /** @var array $allowedCities */ /** @var array $stops */ ?>
-<div class="grid two">
+<div class="grid">
 	<div class="card">
 		<p class="pill">Admin</p>
 		<h1 class="title">Crea passaggio</h1>
@@ -106,10 +106,5 @@
 				<a class="btn" href="<?= e(url('?p=admin_rides')) ?>">Annulla</a>
 			</div>
 		</form>
-	</div>
-
-	<div class="card">
-		<h2 style="margin:0">Suggerimento rubric</h2>
-		<p class="muted" style="margin-top:6px;">Crea un nuovo passaggio scegliendo il driver.</p>
 	</div>
 </div>

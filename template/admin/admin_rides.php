@@ -15,7 +15,8 @@
 	<?php if (!$rides): ?>
 		<p class="muted" style="margin-top:14px;">Nessun passaggio nel sistema.</p>
 	<?php else: ?>
-		<table class="table">
+		<div class="table-wrap">
+		<table class="table" style="min-width:920px;">
 			<thead>
 				<tr>
 					<th>Tratta</th>
@@ -40,5 +41,6 @@
 			<?php endforeach; ?>
 			</tbody>
 		</table>
+		</div>
 	<?php endif; ?>
 </div>

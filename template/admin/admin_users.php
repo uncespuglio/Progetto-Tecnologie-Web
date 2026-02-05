@@ -17,10 +17,9 @@
 	<?php else: ?>
 		<div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
 			<span class="pill">Totale: <?= e((string)count($users)) ?></span>
-			<span class="muted" style="font-size:13px;">Suggerimento: gestisci le recensioni da “Recensioni”.</span>
 		</div>
 
-		<div style="margin-top:10px; overflow:auto; border-radius:12px;">
+		<div class="table-wrap">
 		<table class="table admin-users" style="min-width:980px;">
 			<thead>
 				<tr>

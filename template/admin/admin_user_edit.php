@@ -40,10 +40,6 @@
 	</div>
 
 	<div class="card">
-		<h2 style="margin:0">Nota rubric</h2>
-		<p class="muted" style="margin-top:6px;">Questa schermata copre l’aggiornamento profilo lato Admin e la gestione ruoli (contenuti/utenti).</p>
-
-		<hr style="margin:14px 0; border:0; border-top:1px solid rgba(148,163,184,.18)">
 		<h3 style="margin:0">Zona pericolosa</h3>
 		<p class="muted" style="margin-top:6px;">Eliminare un account rimuove anche i suoi passaggi e/o prenotazioni (in base ai vincoli del DB).</p>
 		<a class="btn danger" href="<?= e(url('?p=admin_user_delete&id=' . (int)$u['id'])) ?>">Elimina account</a>

@@ -87,7 +87,8 @@
 	<?php if (empty($feedback)): ?>
 		<p class="muted">Nessuna recensione.</p>
 	<?php else: ?>
-		<table class="table" style="margin-top:10px;">
+		<div class="table-wrap">
+		<table class="table" style="min-width:1100px;">
 			<thead>
 				<tr>
 					<th>Destinatario</th>
@@ -157,5 +158,6 @@
 			<?php endforeach; ?>
 			</tbody>
 		</table>
+		</div>
 	<?php endif; ?>
 </div>

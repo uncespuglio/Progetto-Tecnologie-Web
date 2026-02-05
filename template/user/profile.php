@@ -60,7 +60,8 @@
 		<?php if (empty($feedbackReceived)): ?>
 			<p class="muted">Nessun feedback ricevuto ancora.</p>
 		<?php else: ?>
-			<table class="table" style="margin-top:10px;">
+			<div class="table-wrap">
+			<table class="table" style="min-width:900px; margin-top:10px;">
 				<thead>
 					<tr>
 						<th>Da</th>
@@ -92,6 +93,7 @@
 				<?php endforeach; ?>
 				</tbody>
 			</table>
+			</div>
 		<?php endif; ?>
 
 		<h2 style="margin-top:18px;">Feedback inviati</h2>
@@ -99,7 +101,8 @@
 		<?php if (empty($feedbackSent)): ?>
 			<p class="muted">Non hai ancora inviato feedback.</p>
 		<?php else: ?>
-			<table class="table" style="margin-top:10px;">
+				<div class="table-wrap">
+				<table class="table" style="min-width:900px; margin-top:10px;">
 				<thead>
 					<tr>
 						<th>A</th>
@@ -131,6 +134,7 @@
 				<?php endforeach; ?>
 				</tbody>
 			</table>
+				</div>
 		<?php endif; ?>
 	</div>
 
@@ -140,7 +144,8 @@
 		<?php if (!$myRequestsUpcoming): ?>
 			<p class="muted">Non hai ancora richiesto posti.</p>
 		<?php else: ?>
-			<table class="table">
+			<div class="table-wrap">
+			<table class="table" style="min-width:920px;">
 				<thead>
 					<tr>
 						<th>Passaggio</th>
@@ -172,6 +177,7 @@
 				<?php endforeach; ?>
 				</tbody>
 			</table>
+			</div>
 		<?php endif; ?>
 
 		<h2 style="margin-top:18px;">Storico (viaggi effettuati)</h2>
@@ -179,7 +185,8 @@
 		<?php if (!$myTripsDone): ?>
 			<p class="muted">Nessun viaggio effettuato ancora.</p>
 		<?php else: ?>
-			<table class="table" style="margin-top:10px;">
+			<div class="table-wrap">
+			<table class="table" style="min-width:920px;">
 				<thead>
 					<tr>
 						<th>Passaggio</th>
@@ -198,6 +205,7 @@
 				<?php endforeach; ?>
 				</tbody>
 			</table>
+			</div>
 		<?php endif; ?>
 	</div>
 </div>

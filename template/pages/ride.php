@@ -66,7 +66,8 @@
 				<?php if (empty($travelers)): ?>
 					<p class="muted" style="margin-top:8px;">Nessun passeggero (nessuna richiesta accettata).</p>
 				<?php else: ?>
-					<table class="table" style="margin-top:8px;">
+					<div class="table-wrap">
+					<table class="table" style="min-width:980px; margin-top:8px;">
 						<thead>
 							<tr>
 								<th>Studente</th>
@@ -101,6 +102,7 @@
 						<?php endforeach; ?>
 						</tbody>
 					</table>
+					</div>
 				<?php endif; ?>
 			<?php else: ?>
 				<p class="muted" style="margin-top:10px">Sei il driver di questo passaggio.</p>
@@ -108,7 +110,8 @@
 				<?php if (empty($rideRequests)): ?>
 					<p class="muted" style="margin-top:8px;">Nessuna richiesta al momento.</p>
 				<?php else: ?>
-					<table class="table" style="margin-top:10px;">
+					<div class="table-wrap">
+					<table class="table" style="min-width:980px; margin-top:10px;">
 						<thead>
 							<tr>
 								<th>Studente</th>
@@ -149,6 +152,7 @@
 						<?php endforeach; ?>
 						</tbody>
 					</table>
+					</div>
 				<?php endif; ?>
 				<div style="margin-top:12px;">
 					<a class="btn" href="<?= e(url('?p=my_rides')) ?>">Vai a “I miei passaggi”</a>

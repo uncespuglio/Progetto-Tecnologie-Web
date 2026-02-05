@@ -76,7 +76,8 @@
 	<?php if (!$requests): ?>
 		<p class="muted" style="margin-top:10px;">Nessuna prenotazione nel sistema.</p>
 	<?php else: ?>
-		<table class="table" style="margin-top:10px;">
+		<div class="table-wrap">
+		<table class="table" style="min-width:980px;">
 			<thead>
 				<tr>
 					<th>Passaggio</th>
@@ -140,5 +141,6 @@
 			<?php endforeach; ?>
 			</tbody>
 		</table>
+		</div>
 	<?php endif; ?>
 </div>

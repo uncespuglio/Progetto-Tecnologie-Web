@@ -107,9 +107,4 @@
 			</div>
 		</form>
 	</div>
-
-	<div class="card">
-		<h2 style="margin:0">Suggerimento rubric</h2>
-		<p class="muted" style="margin-top:6px;">Modifica i dettagli del passaggio.</p>
-	</div>
 </div>
