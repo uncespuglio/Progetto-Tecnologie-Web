@@ -53,6 +53,31 @@
 			<p class="muted" style="margin-top:10px">Sei il driver di questo passaggio.</p>
 			<a class="btn" href="<?= e(url('?p=my_rides')) ?>">Gestisci richieste</a>
 		<?php else: ?>
+			<?php
+				$driverEmail = (string)($ride['driver_email'] ?? '');
+				$subject = 'UniRide: info passaggio ' . (string)$ride['from_city'] . ' → ' . (string)$ride['to_city'] . ' (' . (string)$ride['depart_at'] . ')';
+				$bodyLines = [
+					'Ciao,',
+					'',
+					'Sono ' . (string)($user['full_name'] ?? $user['email'] ?? 'uno studente') . ' e vorrei informazioni su questo passaggio:',
+					'- Tratta: ' . (string)$ride['from_city'] . ' → ' . (string)$ride['to_city'],
+					'- Partenza: ' . (string)$ride['depart_at'],
+					'- Link: ' . absolute_url('?p=ride&id=' . (int)$ride['id']),
+					'',
+					'Grazie!',
+				];
+				$mailto = 'mailto:' . $driverEmail;
+				if ($driverEmail !== '') {
+					$mailto .= '?' . http_build_query([
+						'subject' => $subject,
+						'body' => implode("\n", $bodyLines),
+					], '', '&', PHP_QUERY_RFC3986);
+				}
+			?>
+			<?php if ($driverEmail !== ''): ?>
+				<a class="btn" href="<?= e($mailto) ?>">Contatta via email</a>
+			<?php endif; ?>
+
 			<?php if ($myRequest): ?>
 				<p class="muted" style="margin-top:10px">Hai già una richiesta: <span class="pill"><?= e($myRequest['status']) ?></span></p>
 				<?php if ($myRequest['status'] === 'pending' || $myRequest['status'] === 'accepted'): ?>

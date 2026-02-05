@@ -8,7 +8,7 @@ if ($id <= 0) {
 }
 
 $stmt = $pdo->prepare(
-	"SELECT r.*, u.full_name AS driver_name, u.university, u.id AS driver_user_id
+	"SELECT r.*, u.full_name AS driver_name, u.university, u.email AS driver_email, u.id AS driver_user_id
 	 FROM rides r
 	 JOIN users u ON u.id = r.driver_id
 	 WHERE r.id = :id"
