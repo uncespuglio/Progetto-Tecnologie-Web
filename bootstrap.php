@@ -104,10 +104,29 @@ function maps_station_for_city(string $city): string
 	return $map[$city] ?? ('Stazione di ' . trim($city));
 }
 
-function google_maps_directions_url(string $fromCity, string $toCity, array $stops = []): string
+function maps_unibo_campus_for_city(string $city): string
 {
-	$origin = maps_station_for_city($fromCity);
-	$destination = maps_station_for_city($toCity);
+	$city = normalize_city($city) ?? $city;
+	$map = [
+		// Nota: usiamo query testuali stabili (nome campus) per Google Maps.
+		'Bologna' => 'Università di Bologna - Via Zamboni 33',
+		'Forlì' => 'Campus di Forlì - Università di Bologna',
+		'Cesena' => 'Nuovo Campus Universitario Cesena - Università di Bologna',
+		'Ravenna' => 'Campus di Ravenna - Università di Bologna',
+		'Rimini' => 'Campus di Rimini - Università di Bologna',
+	];
+	return $map[$city] ?? ('Università di Bologna ' . trim($city));
+}
+
+function maps_place_for_city(string $city, string $mode = 'campus'): string
+{
+	return ($mode === 'station') ? maps_station_for_city($city) : maps_unibo_campus_for_city($city);
+}
+
+function google_maps_directions_url(string $fromCity, string $toCity, array $stops = [], string $mode = 'campus'): string
+{
+	$origin = maps_place_for_city($fromCity, $mode);
+	$destination = maps_place_for_city($toCity, $mode);
 
 	$waypoints = [];
 	foreach ($stops as $s) {
@@ -118,9 +137,9 @@ function google_maps_directions_url(string $fromCity, string $toCity, array $sto
 		if ($city === normalize_city($fromCity) || $city === normalize_city($toCity)) {
 			continue;
 		}
-		$station = maps_station_for_city($city);
-		if (!in_array($station, $waypoints, true)) {
-			$waypoints[] = $station;
+		$place = maps_place_for_city($city, $mode);
+		if (!in_array($place, $waypoints, true)) {
+			$waypoints[] = $place;
 		}
 	}
 

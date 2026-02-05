@@ -29,7 +29,7 @@
 		<?php endif; ?>
 
 		<div class="muted" style="margin-top:10px; font-size:12px;">
-			<a href="<?= e($mapsUrl) ?>" target="_blank" rel="noopener">Apri percorso su Google Maps (stazioni)</a>
+			<a href="<?= e($mapsUrl) ?>" target="_blank" rel="noopener">Apri percorso su Google Maps (campus UNIBO)</a>
 		</div>
 
 		<div style="margin-top:12px; display:grid; gap:10px;">
