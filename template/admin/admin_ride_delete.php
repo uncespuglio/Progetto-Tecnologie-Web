@@ -1,6 +1,6 @@
 <?php /** @var array $ride */ ?>
 <div class="card" style="margin-top:18px;">
-	<p class="pill">Admin • CRUD</p>
+	<p class="pill">Admin</p>
 	<h1 class="title">Elimina passaggio</h1>
 	<p class="subtitle">Conferma eliminazione (operazione <strong>Delete</strong>).</p>
 

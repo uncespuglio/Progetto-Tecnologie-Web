@@ -46,7 +46,7 @@
 			<div class="muted">Driver: <strong style="color:var(--text)"><?= e($ride['driver_name']) ?></strong> • <?= e($label) ?></div>
 			<div>Posti disponibili: <span class="pill"><?= e((string)$ride['seats_available']) ?></span></div>
 			<?php if (!empty($ride['notes'])): ?>
-				<div class="card" style="padding:12px; background: rgba(15,23,42,.55)">
+				<div class="card" style="padding:12px; background: var(--panel2)">
 					<div class="muted" style="font-size:12px">Note</div>
 					<div><?= nl2br(e((string)$ride['notes'])) ?></div>
 				</div>

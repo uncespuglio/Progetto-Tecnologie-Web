@@ -1,7 +1,7 @@
 <?php /** @var array $ride */ /** @var array $users */ /** @var string $departLocal */ /** @var array $allowedCities */ /** @var array $stops */ ?>
 <div class="grid two">
 	<div class="card">
-		<p class="pill">Admin • CRUD</p>
+		<p class="pill">Admin</p>
 		<h1 class="title">Modifica passaggio</h1>
 		<p class="subtitle">Aggiorna i dati dell’annuncio.</p>
 
@@ -41,7 +41,7 @@
 			</div>
 
 
-			<div class="card" style="padding:12px; background: rgba(15,23,42,.55)">
+			<div class="card" style="padding:12px; background: var(--panel2)">
 				<div class="muted" style="font-size:12px;">Tappe (opzionale)</div>
 				<div class="muted" style="font-size:12px; margin-top:6px;">La ricerca considera anche le tappe (match per segmenti).</div>
 
@@ -110,6 +110,6 @@
 
 	<div class="card">
 		<h2 style="margin:0">Suggerimento rubric</h2>
-		<p class="muted" style="margin-top:6px;">Questa schermata documenta chiaramente l’operazione <strong>Update</strong> del CRUD lato Admin.</p>
+		<p class="muted" style="margin-top:6px;">Modifica i dettagli del passaggio.</p>
 	</div>
 </div>

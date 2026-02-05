@@ -11,7 +11,7 @@
 		</div>
 	</div>
 
-	<div class="card" style="margin-top:14px; padding:14px; background: rgba(15,23,42,.55)">
+	<div class="card" style="margin-top:14px; padding:14px; background: var(--panel2)">
 		<h2 style="margin:0">Aggiungi recensione</h2>
 		<form method="post" class="form" action="<?= e(url('?p=admin_feedback')) ?>" style="margin-top:10px;">
 			<?= csrf_field() ?>

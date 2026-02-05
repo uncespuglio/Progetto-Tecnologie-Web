@@ -10,7 +10,7 @@ $user = current_user($pdo);
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>UniRide</title>
-	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="style.css?v=<?= (int) @filemtime(__DIR__ . '/../style.css') ?>">
 </head>
 <body>
 	<a class="skip-link" href="#main">Vai al contenuto</a>

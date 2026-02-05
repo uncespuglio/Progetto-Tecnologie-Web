@@ -1,4 +1,4 @@
-<div class="grid two">
+<div class="grid">
 	<div class="card">
 		<h1 class="title">Pubblica passaggio</h1>
 		<p class="subtitle">Crea un annuncio visibile agli altri studenti.</p>
@@ -26,7 +26,7 @@
 				</label>
 			</div>
 
-			<div class="card" style="padding:12px; background: rgba(15,23,42,.55)">
+			<div class="card" style="padding:12px; background: var(--panel2)">
 				<div class="muted" style="font-size:12px;">Tappe (opzionale)</div>
 				<div class="muted" style="font-size:12px; margin-top:6px;">La ricerca considera anche le tappe (match per segmenti).</div>
 
@@ -73,13 +73,5 @@
 				<textarea name="notes" placeholder="Es. solo zaini, no valigie grandi; punto di ritrovo..."> </textarea>
 			</label>
 		</form>
-	</div>
-
-	<div class="card">
-		<h2 style="margin:0">Consigli</h2>
-		<ul class="muted" style="margin-top:8px; line-height:1.6">
-			<li>Metti un orario realistico (ritrovo + traffico).</li>
-			<li>Aggiungi note su bagagli e punto d’incontro.</li>
-		</ul>
 	</div>
 </div>

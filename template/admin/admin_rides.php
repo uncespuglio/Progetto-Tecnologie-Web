@@ -2,7 +2,7 @@
 <div class="card" style="margin-top:18px;">
 	<div style="display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; align-items:flex-end;">
 		<div>
-			<p class="pill">Admin • CRUD</p>
+			<p class="pill">Admin</p>
 			<h1 class="title" style="margin-top:6px;">Passaggi</h1>
 			<p class="subtitle">Modifica o elimina annunci pubblicati dagli utenti.</p>
 		</div>

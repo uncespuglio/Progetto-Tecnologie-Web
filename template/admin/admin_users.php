@@ -20,7 +20,8 @@
 			<span class="muted" style="font-size:13px;">Suggerimento: gestisci le recensioni da “Recensioni”.</span>
 		</div>
 
-		<table class="table">
+		<div style="margin-top:10px; overflow:auto; border-radius:12px;">
+		<table class="table admin-users" style="min-width:980px;">
 			<thead>
 				<tr>
 					<th>Utente</th>
@@ -57,13 +58,16 @@
 							<?php if ($avg !== null): ?> • media <?= e(number_format($avg, 2, ',', '')) ?>/5<?php endif; ?>
 						</div>
 					</td>
-					<td style="display:flex; gap:10px; flex-wrap:wrap;">
-						<a class="btn" href="<?= e(url('?p=admin_user_edit&id=' . (int)$u['id'])) ?>">Modifica</a>
-						<a class="btn danger" href="<?= e(url('?p=admin_user_delete&id=' . (int)$u['id'])) ?>">Elimina</a>
+					<td>
+						<div style="display:flex; gap:10px; flex-wrap:nowrap; align-items:center; white-space:nowrap;">
+							<a class="btn" href="<?= e(url('?p=admin_user_edit&id=' . (int)$u['id'])) ?>">Modifica</a>
+							<a class="btn danger" href="<?= e(url('?p=admin_user_delete&id=' . (int)$u['id'])) ?>">Elimina</a>
+						</div>
 					</td>
 				</tr>
 			<?php endforeach; ?>
 			</tbody>
 		</table>
+		</div>
 	<?php endif; ?>
 </div>
