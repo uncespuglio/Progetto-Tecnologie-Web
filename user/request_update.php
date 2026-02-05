@@ -19,7 +19,7 @@ if ($requestId <= 0 || !in_array($action, ['accept', 'reject', 'cancel'], true))
 }
 
 $stmt = $pdo->prepare(
-	"SELECT rr.*, r.driver_id, r.seats_available
+	"SELECT rr.*, r.driver_id, r.seats_available, r.depart_at
 	 FROM ride_requests rr
 	 JOIN rides r ON r.id = rr.ride_id
 	 WHERE rr.id = :id"
@@ -35,6 +35,17 @@ $rideId = (int)$row['ride_id'];
 $isDriver = ((int)$row['driver_id'] === (int)$user['id']);
 $isPassenger = ((int)$row['passenger_id'] === (int)$user['id']);
 $currentStatus = (string)$row['status'];
+
+// Blocca modifiche su passaggi già effettuati.
+$rideDepart = (string)($row['depart_at'] ?? '');
+if ($rideDepart !== '') {
+	$stmtNow = $pdo->query('SELECT NOW()');
+	$now = (string)$stmtNow->fetchColumn();
+	if ($now !== '' && $rideDepart < $now) {
+		flash('error', 'Il passaggio è già passato.');
+		redirect(url('?p=ride&id=' . $rideId));
+	}
+}
 
 if (($action === 'accept' || $action === 'reject') && !$isDriver) {
 	flash('error', 'Non autorizzato.');

@@ -7,6 +7,7 @@
 	<div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
 		<a class="btn primary" href="<?= e(url('?p=admin_rides')) ?>">Gestisci passaggi (CRUD)</a>
 		<a class="btn" href="<?= e(url('?p=admin_requests')) ?>">Gestisci prenotazioni</a>
+		<a class="btn" href="<?= e(url('?p=admin_feedback')) ?>">Gestisci recensioni</a>
 		<a class="btn" href="<?= e(url('?p=admin_users')) ?>">Gestisci utenti</a>
 	</div>
 

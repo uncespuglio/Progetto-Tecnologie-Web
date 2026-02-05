@@ -59,7 +59,12 @@
 							<a href="<?= e(url('?p=ride&id=' . (int)$r['id'])) ?>">
 								<?= e($r['from_city']) ?> → <?= e($r['to_city']) ?>
 							</a>
-							<div class="muted" style="font-size:12px;">Driver: <?= e($r['driver_name'] ?? '') ?> • <?= e($r['university'] ?? '') ?></div>
+							<?php
+								$avg = isset($r['driver_avg_rating']) ? (float)$r['driver_avg_rating'] : null;
+								$cnt = (int)($r['driver_feedback_count'] ?? 0);
+								$label = driver_quality_label($r['driver_avg_rating'] === null ? null : $avg, $cnt);
+							?>
+							<div class="muted" style="font-size:12px;">Driver: <?= e($r['driver_name'] ?? '') ?> • <?= e($label) ?></div>
 						</td>
 						<td><?= e($r['depart_at']) ?></td>
 						<td><?= e((string)$r['seats_available']) ?></td>

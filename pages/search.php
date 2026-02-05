@@ -30,6 +30,9 @@ $where[] = 'r.to_city IN (' . $in . ')';
 foreach ($allowed as $c) {
 	$params[] = $c;
 }
+
+// Escludi i passaggi già effettuati (data+ora nel passato).
+$where[] = 'r.depart_at >= NOW()';
 foreach ($allowed as $c) {
 	$params[] = $c;
 }
@@ -83,9 +86,15 @@ if ($date !== '') {
 }
 
 $sql = "SELECT r.id, r.from_city, r.to_city, r.depart_at, r.seats_available,
-		u.full_name AS driver_name, u.university
+		u.full_name AS driver_name, u.university,
+		fb.avg_rating AS driver_avg_rating, fb.cnt AS driver_feedback_count
 		FROM rides r
-		JOIN users u ON u.id = r.driver_id";
+		JOIN users u ON u.id = r.driver_id
+		LEFT JOIN (
+			SELECT to_user_id, AVG(rating) AS avg_rating, COUNT(*) AS cnt
+			FROM feedback
+			GROUP BY to_user_id
+		) fb ON fb.to_user_id = r.driver_id";
 
 if ($where) {
 	$sql .= ' WHERE ' . implode(' AND ', $where);

@@ -4,6 +4,8 @@ require_login($pdo);
 
 $user = current_user($pdo);
 
+$editMode = ((int)($_GET['edit'] ?? 0) === 1);
+
 if (is_post()) {
 	verify_csrf();
 
@@ -57,12 +59,66 @@ $stmt = $pdo->prepare(
 	 JOIN rides r ON r.id = rr.ride_id
 	 JOIN users u ON u.id = r.driver_id
 	 WHERE rr.passenger_id = :uid
+	 AND r.depart_at >= NOW()
 	 ORDER BY r.depart_at DESC, rr.created_at DESC"
 );
 $stmt->execute([':uid' => (int)$user['id']]);
-$myRequests = $stmt->fetchAll();
+$myRequestsUpcoming = $stmt->fetchAll();
+
+$stmt = $pdo->prepare(
+	"SELECT rr.id AS request_id, rr.status, rr.created_at,
+		r.id AS ride_id, r.from_city, r.to_city, r.depart_at,
+		u.full_name AS driver_name, u.university AS driver_uni
+	 FROM ride_requests rr
+	 JOIN rides r ON r.id = rr.ride_id
+	 JOIN users u ON u.id = r.driver_id
+	 WHERE rr.passenger_id = :uid
+	 AND rr.status = 'accepted'
+	 AND r.depart_at < NOW()
+	 ORDER BY r.depart_at DESC, rr.created_at DESC"
+);
+$stmt->execute([':uid' => (int)$user['id']]);
+$myTripsDone = $stmt->fetchAll();
+
+$stmt = $pdo->prepare(
+	"SELECT f.rating, f.comment, f.created_at,
+		u.full_name AS from_name, u.email AS from_email,
+		r.id AS ride_id, r.from_city, r.to_city, r.depart_at
+	 FROM feedback f
+	 JOIN users u ON u.id = f.from_user_id
+	 JOIN rides r ON r.id = f.ride_id
+	 WHERE f.to_user_id = :uid
+	 ORDER BY r.depart_at DESC, f.created_at DESC, f.id DESC"
+);
+$stmt->execute([':uid' => (int)$user['id']]);
+$feedbackReceived = $stmt->fetchAll();
+
+$stmt = $pdo->prepare(
+	"SELECT f.rating, f.comment, f.created_at,
+		u.full_name AS to_name, u.email AS to_email,
+		r.id AS ride_id, r.from_city, r.to_city, r.depart_at
+	 FROM feedback f
+	 JOIN users u ON u.id = f.to_user_id
+	 JOIN rides r ON r.id = f.ride_id
+	 WHERE f.from_user_id = :uid
+	 ORDER BY r.depart_at DESC, f.created_at DESC, f.id DESC"
+);
+$stmt->execute([':uid' => (int)$user['id']]);
+$feedbackSent = $stmt->fetchAll();
+
+$stmt = $pdo->prepare('SELECT AVG(rating) AS avg_rating, COUNT(*) AS cnt FROM feedback WHERE to_user_id = :uid');
+$stmt->execute([':uid' => (int)$user['id']]);
+$agg = $stmt->fetch() ?: ['avg_rating' => null, 'cnt' => 0];
+$avgRating = $agg['avg_rating'] !== null ? (float)$agg['avg_rating'] : null;
+$feedbackCount = (int)($agg['cnt'] ?? 0);
 
 render('user/profile.php', [
 	'user' => current_user($pdo),
-	'myRequests' => $myRequests,
+	'editMode' => $editMode,
+	'myRequestsUpcoming' => $myRequestsUpcoming,
+	'myTripsDone' => $myTripsDone,
+	'feedbackReceived' => $feedbackReceived,
+	'feedbackSent' => $feedbackSent,
+	'avgRating' => $avgRating,
+	'feedbackCount' => $feedbackCount,
 ]);

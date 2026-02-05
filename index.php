@@ -54,11 +54,17 @@ switch ($page) {
 		case 'admin_requests':
 			require __DIR__ . '/admin/admin_requests.php';
 		break;
+		case 'admin_feedback':
+			require __DIR__ . '/admin/admin_feedback.php';
+		break;
 		case 'request_seat':
 			require __DIR__ . '/user/request_seat.php';
 		break;
 		case 'request_update':
 			require __DIR__ . '/user/request_update.php';
+		break;
+		case 'feedback_submit':
+			require __DIR__ . '/user/feedback_submit.php';
 		break;
 	case 'login':
 		require __DIR__ . '/pages/login.php';

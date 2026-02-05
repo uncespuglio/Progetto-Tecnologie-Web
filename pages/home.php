@@ -17,11 +17,18 @@ foreach ($allowed as $i => $c) {
 
 $stmt = $pdo->prepare(
 	"SELECT r.id, r.from_city, r.to_city, r.depart_at, r.seats_available,
-		u.full_name AS driver_name, u.university
+		u.full_name AS driver_name, u.university,
+		fb.avg_rating AS driver_avg_rating, fb.cnt AS driver_feedback_count
 	 FROM rides r
 	 JOIN users u ON u.id = r.driver_id
+	 LEFT JOIN (
+		SELECT to_user_id, AVG(rating) AS avg_rating, COUNT(*) AS cnt
+		FROM feedback
+		GROUP BY to_user_id
+	 ) fb ON fb.to_user_id = r.driver_id
 	 WHERE r.from_city IN (" . implode(',', $fromIn) . ")
 	 AND r.to_city IN (" . implode(',', $toIn) . ")
+	 AND r.depart_at >= NOW()
 	 ORDER BY r.depart_at ASC
 	 LIMIT 10"
 );

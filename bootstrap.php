@@ -123,6 +123,27 @@ function maps_place_for_city(string $city, string $mode = 'campus'): string
 	return ($mode === 'station') ? maps_station_for_city($city) : maps_unibo_campus_for_city($city);
 }
 
+function driver_quality_label(?float $avgRating, int $count): string
+{
+	if ($count <= 0 || $avgRating === null) {
+		return 'Senza valutazione';
+	}
+	$m = $avgRating;
+	if ($m < 2.0) {
+		return 'Driver pessimo';
+	}
+	if ($m < 3.0) {
+		return 'Driver discreto';
+	}
+	if ($m < 3.75) {
+		return 'Driver buono';
+	}
+	if ($m < 4.5) {
+		return 'Driver molto buono';
+	}
+	return 'Driver ottimo';
+}
+
 function google_maps_directions_url(string $fromCity, string $toCity, array $stops = [], string $mode = 'campus'): string
 {
 	$origin = maps_place_for_city($fromCity, $mode);

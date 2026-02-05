@@ -67,3 +67,22 @@ CREATE TABLE IF NOT EXISTS ride_stops (
 	INDEX idx_stops_ride (ride_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+CREATE TABLE IF NOT EXISTS feedback (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+	context VARCHAR(20) NOT NULL DEFAULT 'ride',
+	context_ref VARCHAR(64) NOT NULL DEFAULT '',
+	ride_id INT NULL,
+	from_user_id INT NOT NULL,
+	to_user_id INT NOT NULL,
+	rating TINYINT NOT NULL,
+	comment TEXT NULL,
+	created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	updated_at TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+	UNIQUE KEY uniq_feedback_ctx (context, context_ref, from_user_id, to_user_id),
+	INDEX idx_feedback_ride (ride_id),
+	INDEX idx_feedback_to (to_user_id),
+	CONSTRAINT fk_feedback_ride FOREIGN KEY (ride_id) REFERENCES rides(id) ON DELETE CASCADE,
+	CONSTRAINT fk_feedback_from FOREIGN KEY (from_user_id) REFERENCES users(id) ON DELETE CASCADE,
+	CONSTRAINT fk_feedback_to FOREIGN KEY (to_user_id) REFERENCES users(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
