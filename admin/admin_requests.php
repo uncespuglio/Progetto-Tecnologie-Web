@@ -117,8 +117,6 @@ if (is_post()) {
 			if ($cur === $next) {
 				throw new RuntimeException('Stato già impostato.');
 			}
-
-			// Riallinea posti in base alla transizione.
 			if ($cur !== 'accepted' && $next === 'accepted') {
 				admin_requests_adjust_seats($pdo, $rideId, -1);
 			}

@@ -66,12 +66,10 @@ function ensure_schema(PDO $pdo): void
 		CONSTRAINT fk_rides_driver FOREIGN KEY (driver_id) REFERENCES users(id) ON DELETE CASCADE
 	) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4');
 
-	// Migrazione: rimuovi definitivamente il prezzo dal DB.
 	if (mysql_column_exists($pdo, 'rides', 'price_cents')) {
 		try {
 			$pdo->exec('ALTER TABLE rides DROP COLUMN price_cents');
 		} catch (Throwable $e) {
-			// Non bloccare l'app se l'ALTER fallisce (permessi/lock). Il sito non usa più il prezzo.
 		}
 	}
 
@@ -117,7 +115,6 @@ function ensure_schema(PDO $pdo): void
 		CONSTRAINT fk_feedback_to FOREIGN KEY (to_user_id) REFERENCES users(id) ON DELETE CASCADE
 	) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");
 
-	// Migrazione: supporto feedback manuali (senza ride_id) e nuovo unique key.
 	if (!mysql_column_exists($pdo, 'feedback', 'context')) {
 		try {
 			$pdo->exec("ALTER TABLE feedback ADD COLUMN context VARCHAR(20) NOT NULL DEFAULT 'ride'");
@@ -130,17 +127,14 @@ function ensure_schema(PDO $pdo): void
 		} catch (Throwable $e) {
 		}
 	}
-	// Copia ride_id -> context_ref per feedback esistenti.
 	try {
 		$pdo->exec("UPDATE feedback SET context = 'ride', context_ref = CAST(ride_id AS CHAR) WHERE (context_ref = '' OR context_ref IS NULL) AND ride_id IS NOT NULL");
 	} catch (Throwable $e) {
 	}
-	// Permetti ride_id NULL (per feedback manuali).
 	try {
 		$pdo->exec('ALTER TABLE feedback MODIFY COLUMN ride_id INT NULL');
 	} catch (Throwable $e) {
 	}
-	// Aggiorna unique index.
 	try {
 		$pdo->exec('ALTER TABLE feedback DROP INDEX uniq_feedback');
 	} catch (Throwable $e) {

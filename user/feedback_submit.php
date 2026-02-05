@@ -50,7 +50,6 @@ $driverId = (int)$ride['driver_id'];
 
 $allowed = false;
 
-// Caso 1: driver -> passeggero (serve richiesta accepted)
 if ($fromUserId === $driverId) {
 	$stmt = $pdo->prepare(
 		"SELECT COUNT(*)
@@ -63,7 +62,6 @@ if ($fromUserId === $driverId) {
 	$allowed = ((int)$stmt->fetchColumn() > 0);
 }
 
-// Caso 2: passeggero -> driver (serve richiesta accepted)
 if (!$allowed && $toUserId === $driverId) {
 	$stmt = $pdo->prepare(
 		"SELECT COUNT(*)

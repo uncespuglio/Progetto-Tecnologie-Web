@@ -45,11 +45,9 @@ if (is_post()) {
 				if (!(int)$stmt->fetchColumn()) {
 					throw new RuntimeException('Passaggio non trovato.');
 				}
-				// Permetti più recensioni sullo stesso ride/utente creando una ref univoca.
 				$contextRef = (string)$rideId . '-' . bin2hex(random_bytes(4));
 				$rideFk = $rideId;
 			} else {
-				// Recensione manuale (senza viaggio): ref univoca per non sovrascrivere.
 				$contextRef = 'm-' . bin2hex(random_bytes(6));
 			}
 

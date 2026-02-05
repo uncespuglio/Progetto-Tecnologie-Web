@@ -31,7 +31,6 @@ foreach ($allowed as $c) {
 	$params[] = $c;
 }
 
-// Escludi i passaggi già effettuati (data+ora nel passato).
 $where[] = 'r.depart_at >= NOW()';
 foreach ($allowed as $c) {
 	$params[] = $c;

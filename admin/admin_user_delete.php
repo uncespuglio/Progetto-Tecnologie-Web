@@ -36,7 +36,6 @@ if (is_post()) {
 
 	$pdo->beginTransaction();
 	try {
-		// Se l'utente ha prenotazioni accettate come passeggero, riallinea i posti disponibili.
 		$acc = $pdo->prepare(
 			"SELECT ride_id, COUNT(*) AS c
 			 FROM ride_requests
@@ -60,10 +59,8 @@ if (is_post()) {
 			}
 		}
 
-		// Elimina richieste come passeggero (le altre cascaderanno da rides se è driver).
 		$pdo->prepare('DELETE FROM ride_requests WHERE passenger_id = ?')->execute([$targetId]);
 
-		// Elimina l'utente (rides e stops e richieste correlate vengono eliminate via FK ON DELETE CASCADE).
 		$pdo->prepare('DELETE FROM users WHERE id = ?')->execute([$targetId]);
 
 		$pdo->commit();

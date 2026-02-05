@@ -36,7 +36,6 @@ $isDriver = ((int)$row['driver_id'] === (int)$user['id']);
 $isPassenger = ((int)$row['passenger_id'] === (int)$user['id']);
 $currentStatus = (string)$row['status'];
 
-// Blocca modifiche su passaggi già effettuati.
 $rideDepart = (string)($row['depart_at'] ?? '');
 if ($rideDepart !== '') {
 	$stmtNow = $pdo->query('SELECT NOW()');
