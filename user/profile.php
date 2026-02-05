@@ -81,12 +81,12 @@ $stmt->execute([':uid' => (int)$user['id']]);
 $myTripsDone = $stmt->fetchAll();
 
 $stmt = $pdo->prepare(
-	"SELECT f.rating, f.comment, f.created_at,
+	"SELECT f.context, f.ride_id, f.rating, f.comment, f.created_at,
 		u.full_name AS from_name, u.email AS from_email,
 		r.id AS ride_id, r.from_city, r.to_city, r.depart_at
 	 FROM feedback f
 	 JOIN users u ON u.id = f.from_user_id
-	 JOIN rides r ON r.id = f.ride_id
+	 LEFT JOIN rides r ON r.id = f.ride_id
 	 WHERE f.to_user_id = :uid
 	 ORDER BY r.depart_at DESC, f.created_at DESC, f.id DESC"
 );
@@ -94,12 +94,12 @@ $stmt->execute([':uid' => (int)$user['id']]);
 $feedbackReceived = $stmt->fetchAll();
 
 $stmt = $pdo->prepare(
-	"SELECT f.rating, f.comment, f.created_at,
+	"SELECT f.context, f.ride_id, f.rating, f.comment, f.created_at,
 		u.full_name AS to_name, u.email AS to_email,
 		r.id AS ride_id, r.from_city, r.to_city, r.depart_at
 	 FROM feedback f
 	 JOIN users u ON u.id = f.to_user_id
-	 JOIN rides r ON r.id = f.ride_id
+	 LEFT JOIN rides r ON r.id = f.ride_id
 	 WHERE f.from_user_id = :uid
 	 ORDER BY r.depart_at DESC, f.created_at DESC, f.id DESC"
 );

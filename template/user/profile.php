@@ -80,8 +80,13 @@
 						</td>
 						<td><span class="pill"><?= e((string)$f['rating']) ?>/5</span></td>
 						<td>
-							<a href="<?= e(url('?p=ride&id=' . (int)$f['ride_id'])) ?>"><?= e((string)$f['from_city']) ?> → <?= e((string)$f['to_city']) ?></a>
-							<div class="muted" style="font-size:12px; margin-top:4px;"><?= e((string)$f['depart_at']) ?></div>
+							<?php if (!empty($f['ride_id']) && !empty($f['from_city']) && !empty($f['to_city'])): ?>
+								<a href="<?= e(url('?p=ride&id=' . (int)$f['ride_id'])) ?>"><?= e((string)$f['from_city']) ?> → <?= e((string)$f['to_city']) ?></a>
+								<div class="muted" style="font-size:12px; margin-top:4px;"><?= e((string)$f['depart_at']) ?></div>
+							<?php else: ?>
+								<span class="pill">Manuale</span>
+								<div class="muted" style="font-size:12px; margin-top:4px;">Creato il <?= e((string)$f['created_at']) ?></div>
+							<?php endif; ?>
 						</td>
 					</tr>
 				<?php endforeach; ?>
@@ -114,8 +119,13 @@
 						</td>
 						<td><span class="pill"><?= e((string)$f['rating']) ?>/5</span></td>
 						<td>
-							<a href="<?= e(url('?p=ride&id=' . (int)$f['ride_id'])) ?>"><?= e((string)$f['from_city']) ?> → <?= e((string)$f['to_city']) ?></a>
-							<div class="muted" style="font-size:12px; margin-top:4px;"><?= e((string)$f['depart_at']) ?></div>
+							<?php if (!empty($f['ride_id']) && !empty($f['from_city']) && !empty($f['to_city'])): ?>
+								<a href="<?= e(url('?p=ride&id=' . (int)$f['ride_id'])) ?>"><?= e((string)$f['from_city']) ?> → <?= e((string)$f['to_city']) ?></a>
+								<div class="muted" style="font-size:12px; margin-top:4px;"><?= e((string)$f['depart_at']) ?></div>
+							<?php else: ?>
+								<span class="pill">Manuale</span>
+								<div class="muted" style="font-size:12px; margin-top:4px;">Creato il <?= e((string)$f['created_at']) ?></div>
+							<?php endif; ?>
 						</td>
 					</tr>
 				<?php endforeach; ?>
